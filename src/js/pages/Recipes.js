@@ -1,6 +1,7 @@
+import {FormikRecipeForm} from "../components/RecipesComponents/RecipeForm.js"
 
 export default function Recipes(){
     return(
-        <p>Recipe Page</p>
+        <FormikRecipeForm/>
     )
 }
