@@ -2,22 +2,15 @@ import {Formik, Form, Field} from "formik";
 import * as Yup from "yup";
 import React from "react";
 import {FileField} from "./ImageForm.js"
-import styled, {css} from "styled-components";
+import {Container} from '../Misc/Container.js';
 
-const Container = styled.div`
-    display:flex;
-    flex-direction: ${props=>props.direction};
-    ${props => props.grow && css`
-        flex-grow:1;
-    `}
-`;
 
 const initialValues ={
     image:"",
     title:"",
     description:"",
     time:"",
-    timeUnit:"",
+    timeUnit:"hours",
     serves:"",
 
    
@@ -32,7 +25,7 @@ const nameSchema = Yup.object().shape({
      console.log(values);
  };
 
- const RecipeForm = ({errors,touched, handleSubmit}) => (
+ const RecipeForm = ({errors,touched, handleSubmit, values, handleChange, handleBlur}) => (
     <Form>
         <Container direction="row">
             <Container direction="column">
@@ -45,7 +38,7 @@ const nameSchema = Yup.object().shape({
             
             <Container grow direction="column">
                 <label htmlFor="title">Title:</label>
-                <input
+                <Field
                 id="title"
                 type="text"
                 name="title"
@@ -53,7 +46,7 @@ const nameSchema = Yup.object().shape({
                 />
                 
                 <label htmlFor="title">Description:</label>
-                <input
+                <Field
                 id="description"
                 type="text"
                 name="description"
@@ -62,20 +55,24 @@ const nameSchema = Yup.object().shape({
 
                 <label htmlFor="time">Time to cook:</label>
                 <Container direction="row">
-                    <input
+                    <Field
                     id="time"
                     type="number"
                     name="time"
                     placeholder="0"
                     />
-                    <select name="timeUnit" default="hours">
+                    <select name="timeUnit" 
+                    default="hours" 
+                    value={values.timeUnit}
+                    onChange={handleChange}
+                    onBlur={handleBlur}>
                         <option value="hours">Hours</option>
                         <option value="minutes">Minutes</option>
                     </select>
                 </Container>
                 <label htmlFor="serves">Serves:</label>
 
-                <input
+                <Field
                 id="serves"
                 type="number"
                 name="serves"
