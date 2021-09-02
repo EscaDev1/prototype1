@@ -1,9 +1,9 @@
 import {Formik, Form, Field} from "formik";
 import * as Yup from "yup";
 import React from "react";
-import {FileField} from "./ImageForm.js"
-import {Container} from '../Misc/Container.js';
-
+import {FileField} from "./ImageForm"
+import {Container} from '../Misc/Container';
+import {ItemField} from "./ItemForm"
 
 const initialValues ={
     image:"",
@@ -12,8 +12,7 @@ const initialValues ={
     time:"",
     timeUnit:"hours",
     serves:"",
-
-   
+    items:[]
 }
 
 const nameSchema = Yup.object().shape({
@@ -81,15 +80,15 @@ const nameSchema = Yup.object().shape({
             </Container>
 
         </Container>
-        
+        <ItemField value={new Map()}/>
         <input type="submit" value="Submit" onSubmit={handleSubmit} />
     </Form>
  );
 
- export const FormikRecipeForm = () => (
+ export const FormikRecipeForm = (props) => (
     <div>
         <Formik
-            initialValues={initialValues}
+            initialValues={props.values===null?initialValues:props.values}
             validationSchema ={nameSchema}
             onSubmit={handleSubmit}
             children={RecipeForm}

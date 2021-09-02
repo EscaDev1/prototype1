@@ -35,7 +35,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
 });
-
+//potentially change to props
 const Image = ({ data, size}) => <Thumbnail size={(size-2)+"px"} alt="Recipe thumbnail" src={data} />
 
 let FileField = ({name,value,setFieldValue, size})=> {
