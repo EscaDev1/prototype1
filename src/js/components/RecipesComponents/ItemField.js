@@ -7,11 +7,13 @@ import React from "react";
 
 
 
-let ItemField = (props) => {
+let ItemField = ({name,value, setFieldValue}) => {
     
-    const [map, setMap] = React.useState(props.value);
+    const [map, setMap] = React.useState(value);
 
-
+    React.useEffect(() => {
+        name && setFieldValue && setFieldValue(name, map);
+      }, [name, map, setFieldValue]);
 
     const addItem = (value) => {
         let newMap = new Map(map);
@@ -20,8 +22,10 @@ let ItemField = (props) => {
         setMap(newMap);
     };
     const removeItem = (value) => {
-      let newMap = new Map(map); 
-    };
+        let newMap = new Map(map); 
+        newMap.delete(value);
+        setMap(newMap);
+    };  
 
     const buttons = [
         ["clear list",()=>{setMap(new Map());}],
@@ -31,13 +35,15 @@ let ItemField = (props) => {
     return(
         <>
             <ItemEntry buttons={buttons} addItem={addItem}/>
-            <ItemList map={map}></ItemList>
+            <ItemList map={map} delete={removeItem}></ItemList>
         </>
     )
 } ;
 
 
+const withField = Component => ({ field, form, ...props }) => (
+    <Component {...field} {...form} {...props} />
+  );
 
-
-
+ItemField = withField(ItemField);
 export {ItemField};

@@ -4,7 +4,7 @@ const ItemList = (props) => {
     return(
         <Container direction="column">
         {Array.from(props.map,([key,value])=>value).map((item)=>(
-            <Item key={item.id} data={item.data}></Item>
+            <Item key={item.id} id={item.id}data={item.data} delete={props.delete}></Item>
         )
         )}
         </Container>
@@ -20,7 +20,10 @@ const Item = (props) => {
     <p>{props.data.quantity}</p>
     <p>{props.data.unit}</p>
     <button type="button">:</button>
-    <button type="button">x</button>
+    <button 
+    type="button" 
+    onClick={props.delete.bind(null,props.id)}
+    >x</button>
     </Container>
     )
 }

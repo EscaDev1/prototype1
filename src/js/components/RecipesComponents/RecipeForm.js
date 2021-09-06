@@ -3,7 +3,9 @@ import * as Yup from "yup";
 import React from "react";
 import {FileField} from "./ImageForm"
 import {Container} from '../Misc/Container';
-import {ItemField} from "./ItemForm"
+import {ItemField} from "./ItemField"
+import {storeData} from "../../database/database";
+import { v4 as uuidv4 } from 'uuid';
 
 const initialValues ={
     image:"",
@@ -12,7 +14,7 @@ const initialValues ={
     time:"",
     timeUnit:"hours",
     serves:"",
-    items:[]
+    items:new Map(),
 }
 
 const nameSchema = Yup.object().shape({
@@ -20,8 +22,12 @@ const nameSchema = Yup.object().shape({
   });
 
     
- const handleSubmit = values => {
+ const handleSubmit = (values,{resetForm}) => {
+    let id = uuidv4();
+    storeData({id:id, data:values},'recipe_store')
+        .catch(e=>console.log(e));
      console.log(values);
+     resetForm();
  };
 
  const RecipeForm = ({errors,touched, handleSubmit, values, handleChange, handleBlur}) => (
@@ -80,7 +86,7 @@ const nameSchema = Yup.object().shape({
             </Container>
 
         </Container>
-        <ItemField value={new Map()}/>
+        <Field name="items" component={ItemField}/>
         <input type="submit" value="Submit" onSubmit={handleSubmit} />
     </Form>
  );
@@ -95,3 +101,4 @@ const nameSchema = Yup.object().shape({
         />
     </div>
  )
+
