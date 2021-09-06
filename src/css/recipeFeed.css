@@ -1,12 +1,26 @@
 .checkbox {
     position: absolute;
-    right:8px;
+    left:93%;
     bottom:8px;
   }
 
 .recipeItem{
     position: relative;
+    height:400px;
 }
+.recipeTitle{
+    position: absolute;
+    margin-left:5%;
+    margin-right:5%;
+    object-fit: cover;
+
+    bottom:5px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.5em;
+    z-index: 1;
+}
+
 
 button {
     display: inline-block;
@@ -24,4 +38,19 @@ button {
                 transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+.imgButton{
+    position: absolute;
+    left:0;
+    height:100% ;
+    width: 100%;
+    opacity: 0%;
+    z-index: 2;
+}
+.recipeContainer{
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    width:800px;
 }
