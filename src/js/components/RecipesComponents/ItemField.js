@@ -35,7 +35,7 @@ let ItemField = ({name,value, setFieldValue}) => {
     return(
         <>
             <ItemEntry buttons={buttons} addItem={addItem}/>
-            <ItemList map={map} delete={removeItem}></ItemList>
+            <ItemList map={map} delete={removeItem} title={"Ingredients"}></ItemList>
         </>
     )
 } ;

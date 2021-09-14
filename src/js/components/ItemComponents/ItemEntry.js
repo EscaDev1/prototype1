@@ -18,11 +18,12 @@ const ItemEComp = (props) => {
                 value={item}
                 onChange={event=>setItem(event.target.value)}
             />
-            <select 
+            <select  
+            className="category"
             value={category}
             onChange={event=>setCategory(event.target.value)}
             >
-                <option value="">Choose a Category..</option>
+                <option  value="">Choose a Category..</option>
                 <option value="meat">meat</option>
                 <option value="fruit and veg">fruit and veg</option>
                 <option value="dairy">dairy</option>
@@ -46,7 +47,7 @@ const ItemEntry = (props) =>{
     return(
     <>
         <Container direction="column">
-            <Container direction="row">
+            <Container direction="column ">
                 <ItemEComp addItem={props.addItem} />
                 <button type="button" onClick={()=> setShowMenu(!showMenu)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

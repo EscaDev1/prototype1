@@ -2,12 +2,54 @@
 import React from "react";
 import '../../../css/recipeFeed.css';
 import styled from "styled-components";
+import {getAll} from "../../database/database";
+import { useHistory } from "react-router-dom";
 
-const RecipeFeed = (props) => {
+const RecipeContainer =  styled.div`
+    width: ${props => props.size};
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: row;
     
-    const [checked, setChecked] = React.useState(props.checked);
-    const [selected, setSelected] = React.useState(0);
+`;
 
+const RecipeDiv = styled.div`
+    position: relative;
+    height: ${props => props.size};
+    width:50vw;
+    height:50vw;
+    background-color: black;
+    @media screen and (max-width: 250px) {
+        
+            width: 125px;
+            height:125px
+       
+    }
+    @media screen and (min-width: 700px) {
+        
+            width: 350px;
+            height:350px
+        
+    }
+
+`;
+const RecipeFeed = (props) => {
+    const [images, setImages] = React.useState(null);
+    const [checked, setChecked] = React.useState(new Map());
+    const [selected, setSelected] = React.useState(0);
+    const loadImages = ()=>{if (images ===null){
+        getAll('recipe_store')
+            .then(data=>{
+                setImages(data);
+                let newMap = new Map();
+                for(let i=0;i<data.length;i++){                  
+                    newMap.set(data[i].id, false);
+                }
+                setChecked(newMap);              
+            });
+        
+    }}
+    React.useEffect(loadImages);
     const toggleTrue = (id) => {
         let value = checked.get(id);
         if(!value){
@@ -23,20 +65,23 @@ const RecipeFeed = (props) => {
         
     }
     return(
-        <div className="recipeContainer">
-        {props.images===null ||checked===undefined?null:props.images.map((item)=>(
+        <RecipeContainer size={props.size+"px"}>
+        {images===null ||checked===undefined?null:images.map((item)=>(
             
             <RecipeItem 
+            size={props.size/2}
             toggle={toggleTrue}
             key={item.id} 
             id={item.id} 
             image={item.data.image}
             title={item.data.title}
             checked={checked.get(item.id)} 
-            selected={selected}/>
+            selected={selected}
+            setTarget={props.targetSetter.bind(null, item)}
+            />
             )
         )}
-        </div>
+        </RecipeContainer>
     )
 }
 
@@ -48,24 +93,24 @@ const Thumbnail = styled.img`
 const Image = (props) => 
     <Thumbnail 
    
-    size={(props.size)+"px"} 
+    size={"100%"} 
     alt="Recipe thumbnail" 
     src={props.data} />;
 
 const RecipeItem = (props)=>{
     let timer;
+    let history = useHistory();
     return(
-        <div
-        className="recipeItem"
+        <RecipeDiv size={props.size}
         >
             <Image
             data={props.image}
-            size={400}
+            size={props.size}
              />
              {props.selected===0?
              <button
              //Onclick to take user to recipe card
-             onClick={()=>{console.log("clikc")}}
+             onClick={()=>{props.setTarget();history.push('/recipeCard')}}
              onMouseDown={()=>{timer=setTimeout(()=>{props.toggle(props.id)},1000);}}
              onMouseUp={()=>clearTimeout(timer)}
              className="imgButton"
@@ -77,8 +122,8 @@ const RecipeItem = (props)=>{
              }
             {props.selected===0||!props.checked?null:<svg 
             xmlns="http://www.w3.org/2000/svg"
-             width="16" 
-             height="16" 
+             width={props.size*0.05}
+             height={props.size*0.05}
              fill="white" 
              className="bi bi-check2-square checkbox" 
              viewBox="0 0 16 16" >
@@ -86,7 +131,7 @@ const RecipeItem = (props)=>{
             <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
             </svg>}
             <p className="recipeTitle">{props.title}</p>
-        </div>
+        </RecipeDiv>
     )
 }
 

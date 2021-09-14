@@ -6,6 +6,7 @@ import {Container} from '../Misc/Container';
 import {ItemField} from "./ItemField"
 import {storeData} from "../../database/database";
 import { v4 as uuidv4 } from 'uuid';
+import '../../../css/recipeForm.css';
 
 const initialValues ={
     image:"",
@@ -25,24 +26,30 @@ const nameSchema = Yup.object().shape({
  const handleSubmit = (values,{resetForm}) => {
     let id = uuidv4();
     storeData({id:id, data:values},'recipe_store')
+        .then(()=>{
+            console.log(values);
+            resetForm();
+            window.location.href = '/';  
+        })
         .catch(e=>console.log(e));
-     console.log(values);
-     resetForm();
+        
+     
  };
 
  const RecipeForm = ({errors,touched, handleSubmit, values, handleChange, handleBlur}) => (
-    <Form>
-        <Container direction="row">
+    <Form className="width-scalable">
+        
             <Container direction="column">
-                <label htmlFor="image">Thumbnail:</label>
-                <Field name="image" size="400" component={FileField}/>
+                
+                <p htmlFor="image">Thumbnail:</p>
+                <Field name="image"  component={FileField}/>
                 {errors.image && touched.image ? (
                     <div>{errors.image}</div>
                 ):null}
-            </Container>
+                
             
-            <Container grow direction="column">
-                <label htmlFor="title">Title:</label>
+            
+                <label htmlFor="title" >Title:</label>
                 <Field
                 id="title"
                 type="text"
@@ -59,7 +66,7 @@ const nameSchema = Yup.object().shape({
                 />
 
                 <label htmlFor="time">Time to cook:</label>
-                <Container direction="row">
+                
                     <Field
                     id="time"
                     type="number"
@@ -74,7 +81,7 @@ const nameSchema = Yup.object().shape({
                         <option value="hours">Hours</option>
                         <option value="minutes">Minutes</option>
                     </select>
-                </Container>
+               
                 <label htmlFor="serves">Serves:</label>
 
                 <Field
@@ -83,22 +90,36 @@ const nameSchema = Yup.object().shape({
                 name="serves"
                 placeholder="0"
                 />
-            </Container>
+   
 
         </Container>
-        <Field name="items" component={ItemField}/>
-        <input type="submit" value="Submit" onSubmit={handleSubmit} />
+        <div className="item-entry">
+        <Field name="items" component={ItemField} />
+        </div>
+        <input style={submitButton} type="submit" value="Submit" onSubmit={handleSubmit} />
     </Form>
  );
 
+const submitButton = {
+    position:'fixed',
+    bottom:'0',
+    margin:'auto',
+    width:'100%',
+    height:'30px',
+    backgroundColor:'lightgray',
+    border:'none',
+}
+
+
+
  export const FormikRecipeForm = (props) => (
-    <div>
+    <>
         <Formik
             initialValues={props.values===null?initialValues:props.values}
             validationSchema ={nameSchema}
             onSubmit={handleSubmit}
             children={RecipeForm}
         />
-    </div>
+    </>
  )
 

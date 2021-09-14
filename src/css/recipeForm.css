@@ -1,0 +1,48 @@
+.recipe-text{
+    padding-top: 10px;
+    
+}
+
+.width-scalable{
+    width:100%;
+    
+}
+
+.category{
+    width:50px;
+}
+
+.image-form{
+    width:200px;
+    height:200px; 
+    
+    
+}
+button{
+    color:black;
+}
+
+@media screen and (max-width: 250px) {
+        
+    .image-form{
+        width:200px;
+        height:200px; 
+        
+        
+    }
+
+};
+@media screen and (min-width: 700px) {
+
+    .image-form{
+        width:200px;
+        height:200px; 
+        
+        
+    }
+
+}
+
+.item-entry{
+    margin-top:10px;
+}

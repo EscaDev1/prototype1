@@ -1,19 +1,15 @@
 .checkbox {
     position: absolute;
     left:93%;
-    bottom:8px;
+    bottom:2%;
   }
 
-.recipeItem{
-    position: relative;
-    height:400px;
-}
+
 .recipeTitle{
     position: absolute;
     margin-left:5%;
     margin-right:5%;
     object-fit: cover;
-
     bottom:5px;
     color: white;
     font-weight: 600;
@@ -29,7 +25,7 @@ button {
     margin: 0;
     text-decoration: none;
    padding: 0;
-    color: #ffffff;
+    color: black;
     font-family: sans-serif;
     font-size: 1rem;
     cursor: pointer;
@@ -47,10 +43,4 @@ button {
     width: 100%;
     opacity: 0%;
     z-index: 2;
-}
-.recipeContainer{
-    display: flex;
-    flex-wrap:wrap;
-    flex-direction: row;
-    width:800px;
 }
