@@ -12,7 +12,7 @@ const ItemEComp = (props) => {
         setCategory("");
     }
     return(
-        <>
+        <React.Fragment>
             <input
                 type="text"
                 value={item}
@@ -36,7 +36,7 @@ const ItemEComp = (props) => {
             >add</button>
         
             
-        </>
+        </React.Fragment>
     )
 };
 
@@ -45,7 +45,7 @@ const ItemEComp = (props) => {
 const ItemEntry = (props) =>{
     const [showMenu, setShowMenu] = React.useState(false);  
     return(
-    <>
+    <React.Fragment>
         <Container direction="column">
             <Container direction="column ">
                 <ItemEComp addItem={props.addItem} />
@@ -65,7 +65,7 @@ const ItemEntry = (props) =>{
         </Container>
         
 
-    </>
+    </React.Fragment>
 )};
 
 export {ItemEntry};

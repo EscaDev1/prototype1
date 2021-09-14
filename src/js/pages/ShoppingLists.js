@@ -1,7 +1,7 @@
 import {ItemEntry} from '../components/ItemComponents/ItemEntry';
 import {ItemList} from '../components/ItemComponents/ItemBlock.js';
 import {Navbar} from '../components/Misc/NavBar';
-
+import React from 'react';
 
 const ShoppingList = (props) => {
     

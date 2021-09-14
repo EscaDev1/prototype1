@@ -113,13 +113,13 @@ const submitButton = {
 
 
  export const FormikRecipeForm = (props) => (
-    <>
+    <React.Fragment>
         <Formik
             initialValues={props.values===null?initialValues:props.values}
             validationSchema ={nameSchema}
             onSubmit={handleSubmit}
             children={RecipeForm}
         />
-    </>
+    </React.Fragment>
  )
 

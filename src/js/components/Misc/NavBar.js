@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import React from 'react';
 const NavbarDiv = styled.div`
     position: fixed;
     display:flex;
@@ -85,7 +85,7 @@ const rlink ={
 
 const Navbar = (props) => {
     return(
-        <>
+        <React.Fragment>
         <NavbarDiv>
             {props.leftLink!==undefined?
             <a 
@@ -105,7 +105,7 @@ const Navbar = (props) => {
         <Content>
             {props.children}
         </Content>
-        </>    )
+        </React.Fragment>    )
 }
 
 export {Navbar};

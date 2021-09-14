@@ -7,10 +7,7 @@ import {Navbar} from '../components/Misc/NavBar';
 
 const Recipes = (props) => {
     return(
-        <>
-        
-
-           
+        <React.Fragment>          
         <Navbar 
         title="Recipe Feed"
         rightLink="New Recipe"
@@ -22,14 +19,13 @@ const Recipes = (props) => {
             targetSetter={props.targetSetter} />
         </Navbar>
         
-        
-        </>
+        </React.Fragment>
     )
 }
 
 const NewRecipe = () => {
     return(
-        <>
+        <React.Fragment>
         <Navbar 
         title="New Recipe"
         leftLink="Back"
@@ -37,9 +33,11 @@ const NewRecipe = () => {
         >
             <FormikRecipeForm values={null}></FormikRecipeForm>
         </Navbar>
-        </>
+        </React.Fragment>
     )
 }
+
+
 
 
 
