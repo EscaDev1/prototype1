@@ -111,7 +111,9 @@ const RecipeItem = (props)=>{
              <button
              //Onclick to take user to recipe card
              onClick={()=>{props.setTarget();history.push('/recipeCard')}}
+             onTouchStart={()=>{timer=setTimeout(()=>{props.toggle(props.id)},1000);}}
              onMouseDown={()=>{timer=setTimeout(()=>{props.toggle(props.id)},1000);}}
+             onTouchEnd={()=>clearTimeout(timer)}
              onMouseUp={()=>clearTimeout(timer)}
              className="imgButton"
              ></button>:

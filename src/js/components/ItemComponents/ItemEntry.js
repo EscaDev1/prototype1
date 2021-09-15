@@ -1,22 +1,35 @@
 //import {ItemEntryForm} from './ItemEntryForm.js';
 import {Container} from '../Misc/Container.js';
-
-import React from "react";
+import {processString} from '../../scripts/amountCalc'
+import React, { useState } from "react";
+import '../../../css/itemEntry.css';
 
 const ItemEComp = (props) => {
     const [item, setItem] = React.useState("");
     const [category, setCategory] = React.useState("");
-    const submit = () => {
-        props.addItem({item,category});
+    let [amount, setAmount] = useState("");
+    let [unit, setUnit] = useState("");
+    const submit = () => {      
+        props.addItem({item,category,amount,unit});
         setItem("");
         setCategory("");
+        setAmount("");
+        setUnit("");
+    }
+    const updateString = (value) => {
+        let processed = processString(value);
+        setItem(value);
+        setAmount(processed.quantity);
+        setUnit(processed.unit);
     }
     return(
         <React.Fragment>
+        <div className="flex-row wide">
             <input
                 type="text"
                 value={item}
-                onChange={event=>setItem(event.target.value)}
+                onChange={event=>updateString(event.target.value)}
+                className="grow"
             />
             <select  
             className="category"
@@ -32,6 +45,10 @@ const ItemEComp = (props) => {
                 <option value="cupboard">cupboard</option>
                 <option value="home">home</option>
             </select>
+        </div>
+            <AmountEntry 
+            amount={amount} setAmount={setAmount}
+            unit={unit} setUnit={setUnit}/>
             <button type="button" onClick={submit}
             >add</button>
         
@@ -41,6 +58,27 @@ const ItemEComp = (props) => {
 };
 
 
+const AmountEntry = (props) => {
+   
+    return(
+        <div className="flex-row">
+            <input type="number" value={props.amount} onChange={e=>props.setAmount(e.target.value)}/>
+            <select  
+            value={props.unit}
+            onChange={event=>props.setUnit(event.target.value)}
+            >
+                <option  value="">Unit..</option>
+                <option value="g">g</option>
+                <option value="kg">kg</option>
+                <option value="oz">oz</option>
+                <option value="lb">lb</option>
+                <option value="ml">ml</option>
+                <option value="l">l</option>
+                <option value="cup">cup</option>
+            </select>
+        </div>
+    )
+}
 
 const ItemEntry = (props) =>{
     const [showMenu, setShowMenu] = React.useState(false);  
