@@ -6,3 +6,54 @@
 .grow{
     flex-grow: 1;
 }
+
+
+.category{
+    width:50px;
+}
+.larger-font{
+    font-size: 1.3em;
+}
+
+button {
+    display: inline-block;
+   
+    border-style: 1px solid black;
+    margin: 0;
+    text-decoration: none;
+   padding: 0;
+    color: black;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.entry{
+    border-radius: 0%;
+    border: 1px solid black;
+    
+}
+.options-div-hide{
+    position: absolute;
+    right:0%;
+    top:16px;
+}
+.options-div-show{
+    position: absolute;
+    right:0%;
+    top:36px;
+}
+.options-button{
+    height:20px;
+    border:none;
+    background-color: white;
+}
+.item-entry-container{
+    margin:5px;
+}
+.options-container{
+    position: relative;
+}

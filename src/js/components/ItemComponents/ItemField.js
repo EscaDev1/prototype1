@@ -1,5 +1,5 @@
-import {ItemEntry} from '../ItemComponents/ItemEntry.js';
-import {ItemList} from '../ItemComponents/ItemBlock.js';
+import {ItemEntry} from './ItemEntry.js';
+import {ItemList, Button} from './ItemBlock.js';
 import { v4 as uuidv4 } from 'uuid';
 import React from "react";
 
@@ -34,8 +34,10 @@ let ItemField = ({name,value, setFieldValue}) => {
 
     return(
         <React.Fragment>
-            <ItemEntry buttons={buttons} addItem={addItem}/>
+            <ItemEntry addItem={addItem}/>
+            <Button buttons={buttons}>
             <ItemList map={map} delete={removeItem} title={"Ingredients"}></ItemList>
+            </Button>
         </React.Fragment>
     )
 } ;

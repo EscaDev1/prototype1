@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import React from "react";
 import {FileField} from "./ImageForm"
 import {Container} from '../Misc/Container';
-import {ItemField} from "./ItemField"
+import {ItemField} from "../ItemComponents/ItemField"
 import {storeData} from "../../database/database";
 import { v4 as uuidv4 } from 'uuid';
 import '../../../css/recipeForm.css';
@@ -39,16 +39,20 @@ const nameSchema = Yup.object().shape({
  const RecipeForm = ({errors,touched, handleSubmit, values, handleChange, handleBlur}) => (
     <Form className="width-scalable">
         
-            <Container direction="column">
-                
-                <p htmlFor="image">Thumbnail:</p>
-                <Field name="image"  component={FileField}/>
-                {errors.image && touched.image ? (
-                    <div>{errors.image}</div>
-                ):null}
-                
+            <div
             
-            
+                className="recipe-form-container">
+                
+                <div className="recipe-form-image">
+                    <Field 
+                    name="image"  
+                    component={FileField}
+                    
+                    />
+                </div>
+                
+                <div className="padder"></div>
+                <div className="recipe-form-text">
                 <label htmlFor="title" >Title:</label>
                 <Field
                 id="title"
@@ -90,12 +94,13 @@ const nameSchema = Yup.object().shape({
                 name="serves"
                 placeholder="0"
                 />
-   
+                </div>
 
-        </Container>
+        </div>
         <div className="item-entry">
         <Field name="items" component={ItemField} />
         </div>
+        <div className="recipe-form-bottom-padder"></div>
         <input style={submitButton} type="submit" value="Submit" onSubmit={handleSubmit} />
     </Form>
  );
@@ -103,11 +108,13 @@ const nameSchema = Yup.object().shape({
 const submitButton = {
     position:'fixed',
     bottom:'0',
+    left:'0',
     margin:'auto',
     width:'100%',
     height:'30px',
     backgroundColor:'lightgray',
     border:'none',
+    zIndex:'10'
 }
 
 

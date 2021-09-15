@@ -4,11 +4,13 @@ import {processString} from '../../scripts/amountCalc'
 import React, { useState } from "react";
 import '../../../css/itemEntry.css';
 
-const ItemEComp = (props) => {
+const ItemEntry = (props) => {
     const [item, setItem] = React.useState("");
     const [category, setCategory] = React.useState("");
     let [amount, setAmount] = useState("");
     let [unit, setUnit] = useState("");
+    let [showAmount, setShowAmount] = useState(false);
+
     const submit = () => {      
         props.addItem({item,category,amount,unit});
         setItem("");
@@ -23,20 +25,25 @@ const ItemEComp = (props) => {
         setUnit(processed.unit);
     }
     return(
-        <React.Fragment>
+        <div className="item-entry-container">
         <div className="flex-row wide">
             <input
                 type="text"
                 value={item}
                 onChange={event=>updateString(event.target.value)}
-                className="grow"
+                className="grow larger-font entry"
+                placeholder="Item"
             />
+            <button
+            type="button"
+            onClick={()=>setShowAmount(!showAmount)}
+            >AMT</button>
             <select  
             className="category"
             value={category}
             onChange={event=>setCategory(event.target.value)}
             >
-                <option  value="">Choose a Category..</option>
+                <option  value="">CAT</option>
                 <option value="meat">meat</option>
                 <option value="fruit and veg">fruit and veg</option>
                 <option value="dairy">dairy</option>
@@ -45,15 +52,20 @@ const ItemEComp = (props) => {
                 <option value="cupboard">cupboard</option>
                 <option value="home">home</option>
             </select>
-        </div>
-            <AmountEntry 
-            amount={amount} setAmount={setAmount}
-            unit={unit} setUnit={setUnit}/>
             <button type="button" onClick={submit}
-            >add</button>
+        >add</button>
+        </div>
+        
+        {!showAmount?null:
+        <AmountEntry 
+        amount={amount} setAmount={setAmount}
+        unit={unit} setUnit={setUnit}/>
+       
+        }
+        
         
             
-        </React.Fragment>
+        </div>
     )
 };
 
@@ -62,10 +74,17 @@ const AmountEntry = (props) => {
    
     return(
         <div className="flex-row">
-            <input type="number" value={props.amount} onChange={e=>props.setAmount(e.target.value)}/>
+            <input 
+            type="number" 
+            value={props.amount} 
+            onChange={e=>props.setAmount(e.target.value)}
+            placeholder="Amount"
+            className="entry grow larger-font"
+            />
             <select  
             value={props.unit}
             onChange={event=>props.setUnit(event.target.value)}
+            className="entry"
             >
                 <option  value="">Unit..</option>
                 <option value="g">g</option>
@@ -80,13 +99,13 @@ const AmountEntry = (props) => {
     )
 }
 
-const ItemEntry = (props) =>{
+const Button = (props) =>{
     const [showMenu, setShowMenu] = React.useState(false);  
     return(
     <React.Fragment>
         <Container direction="column">
             <Container direction="column ">
-                <ItemEComp addItem={props.addItem} />
+                
                 <button type="button" onClick={()=> setShowMenu(!showMenu)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
