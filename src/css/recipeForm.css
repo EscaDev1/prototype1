@@ -15,12 +15,10 @@
     flex-direction: column;
     background-color: white;
     padding: 5px 5px 5px 5px;
-    position: -webkit-sticky;
-    position: sticky;
-    top:614px;
+    
 }
 .padder{
-    height:414px;
+    height:100vw;
 }
 .recipe-form-bottom-padder{
     height:50px;
@@ -29,7 +27,7 @@
     position: fixed;
     top:50px;
     width: 100%;
-    height:414px;
+    height:100vw;
     z-index: 0 ;
 }
 .recipe-form-container{
@@ -40,27 +38,25 @@
 button{
     color:black;
 }
-
-@media screen and (max-width: 250px) {
-        
-    .image-form{
-        width:200px;
-        height:200px; 
-        
-        
-    }
-
-};
 @media screen and (min-width: 700px) {
-
-    .image-form{
-        width:200px;
-        height:200px; 
-        
-        
+    .recipe-form-image{
+        height:700px;
+        width: 700px;
+    }
+    .padder{
+        height:700px;
+    }
+}
+@media screen and (max-width: 250px) {
+    .recipe-form-image{   
+        height:250px;
+    }
+    .padder{
+        height:250px;
     }
 
 }
+
 
 .item-entry{
     padding-top:10px;
