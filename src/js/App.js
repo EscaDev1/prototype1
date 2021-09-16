@@ -14,7 +14,6 @@ import {RecipeCardPage} from './pages/RecipeCardPage';
 export default function App() {
 
   let [target, setTarget] = React.useState(null); 
-  console.log(target);
   return (
     <Router>
       <div>

@@ -4,7 +4,7 @@ import React from 'react';
 const ItemContainer = styled.div`
     border:1px solid;
     border-radius: 5px;
-    min-height: 300px;
+    min-height: 0px;
     `
 
 

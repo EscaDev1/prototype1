@@ -52,17 +52,23 @@ const RecipeFeed = (props) => {
     React.useEffect(loadImages);
     const toggleTrue = (id) => {
         let value = checked.get(id);
-        if(!value){
+        console.log(value);
+        if(value){
             let newSelected = selected-1;
             setSelected(newSelected);
         }else{
             let newSelected = selected+1;
             setSelected(newSelected);
         }
+        console.log(selected);
         let newMap = new Map(checked);
         newMap.set(id, !checked.get(id));
         setChecked(newMap);
         
+    }
+    const addRecipe = ()=>{
+        console.log(images);
+        console.log(checked);
     }
     return(
         <RecipeContainer size={props.size+"px"}>
@@ -81,7 +87,9 @@ const RecipeFeed = (props) => {
             />
             )
         )}
+        <button onClick={addRecipe}>add recipe</button>
         </RecipeContainer>
+        
     )
 }
 

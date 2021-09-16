@@ -8,13 +8,24 @@
     
 }
 
-
-.recipe-form-text{
+.recipe-form-text-unstuck{
     z-index: 1;
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 5px 5px 5px 5px;
+    position: sticky;
+    top:20px;
+    
+}
+.recipe-form-text-stuck{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 5px 5px 5px 5px;
+    position: fixed;
+    top:200px;
     
 }
 .padder{
@@ -31,7 +42,7 @@
     z-index: 0 ;
 }
 .recipe-form-container{
-    
+    overflow: scroll;
     display: flex;
     flex-direction: column;
 }

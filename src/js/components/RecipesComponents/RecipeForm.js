@@ -1,8 +1,7 @@
 import {Formik, Form, Field} from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {FileField} from "./ImageForm"
-import {Container} from '../Misc/Container';
 import {ItemField} from "../ItemComponents/ItemField"
 import {storeData} from "../../database/database";
 import { v4 as uuidv4 } from 'uuid';
@@ -36,11 +35,18 @@ const nameSchema = Yup.object().shape({
      
  };
 
- const RecipeForm = ({errors,touched, handleSubmit, values, handleChange, handleBlur}) => (
-    <Form className="width-scalable">
+ const RecipeForm = ({errors,touched, handleSubmit, values, handleChange, handleBlur}) => {
+    const handleScroll = () =>{
+        console.log("scroll");
+    }
+    const [stuck, setStuck] = useState(false);
+    return (
+    <Form 
+    className="width-scalable"
+    onScroll={handleScroll}>
         
             <div
-            
+                
                 className="recipe-form-container">
                 
                 <div className="recipe-form-image">
@@ -52,7 +58,8 @@ const nameSchema = Yup.object().shape({
                 </div>
                 
                 <div className="padder"></div>
-                <div className="recipe-form-text">
+                <div className={!stuck?"recipe-form-text-unstuck":"recipe-form-text-stuck"}>
+                
                 <label htmlFor="title" >Title:</label>
                 <Field
                 id="title"
@@ -103,7 +110,7 @@ const nameSchema = Yup.object().shape({
         <div className="recipe-form-bottom-padder"></div>
         <input style={submitButton} type="submit" value="Submit" onSubmit={handleSubmit} />
     </Form>
- );
+ );}
 
 const submitButton = {
     position:'fixed',
