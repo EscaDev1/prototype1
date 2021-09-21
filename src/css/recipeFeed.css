@@ -18,7 +18,11 @@
 }
 
 
-
+.shoppingCart{
+    position: absolute;
+    left:90%;
+    top: 2%;
+}
 
 .imgButton{
     position: absolute;

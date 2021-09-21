@@ -10,7 +10,7 @@ import {retrieveData, updateData} from '../database/database';
 const ShoppingList = (props) => {
     
     const [list, setList] = React.useState(null);
-    const [listName, setListName] = React.useState(()=>{
+    const [listName] = React.useState(()=>{
         if(props.list ==="default"){return "default_list"}else{return "shopping_list"}
     })
     
